@@ -9,7 +9,7 @@ public class jdbc {
 
 //        String  result= fetch("select loc from dept where deptno=20");
 //        System.out.println(result);
-
+        return;
     }
 
     public static Connection getConnection(String db_name, String pass) {

@@ -18,4 +18,9 @@ as C:\oraclexe\app\oracle\product\10.2.0\server\jdbc\lib\ojdbc14.jar;.;
 
 #### Test connection
 1. clone this repo
-2. run check_jdbc.java file.
+2. compile jdbc.java, compile and run check_jdbc.java file .
+```
+javac jdbc.java
+javac check_jdbc.java
+java check_jdbc
+```
