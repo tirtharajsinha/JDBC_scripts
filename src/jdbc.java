@@ -12,6 +12,7 @@ public class jdbc {
         return;
     }
 
+//    establish the database connection
     public static Connection getConnection(String db_name, String pass) {
 
         try {
@@ -29,7 +30,7 @@ public class jdbc {
         }
         return con;
     }
-
+// close the database connection
     public static void closeConnection(Connection con) {
         try {
             con.close();
@@ -37,7 +38,7 @@ public class jdbc {
             System.out.println(e.toString());
         }
     }
-
+// display data in the tabuler form on select query.
     public static void select(String query, Connection con) {
         try {
 
@@ -73,6 +74,7 @@ public class jdbc {
         }
     }
 
+//    get the single value from the databese.
     public static String fetch(String query, Connection con) {
         String result;
         try {
@@ -92,6 +94,7 @@ public class jdbc {
         return result;
     }
 
+//    run the raw query
     public static void raw(String query, Connection con) {
         try {
             Statement stmt = con.createStatement();
@@ -102,6 +105,8 @@ public class jdbc {
         }
 
     }
+
+//    check the table info
     public static void DESC(String table, Connection copn) throws SQLException {
         if(!isTable(table,con)){
             return;
@@ -122,6 +127,8 @@ public class jdbc {
 
 
     }
+
+//    check table exists or not
     public static Boolean isTable(String table,Connection con) throws SQLException {
 
         table=table.toUpperCase();
@@ -140,6 +147,7 @@ public class jdbc {
         }
     }
 
+//    create a table if table not exists.
     public static Boolean createTable(String table,String columns,Connection con) throws SQLException {
 
         if(isTable(table,con)){
