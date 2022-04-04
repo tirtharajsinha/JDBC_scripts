@@ -7,9 +7,6 @@ public class jdbc {
 
     public static void main(String[] args) {
 
-//        String  result= fetch("select loc from dept where deptno=20");
-//        System.out.println(result);
-        return;
     }
 
 //    establish the database connection
@@ -95,19 +92,19 @@ public class jdbc {
     }
 
 //    run the raw query
-    public static void raw(String query, Connection con) {
+    public static ResultSet raw(String query, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            stmt.executeQuery(query);
+            return stmt.executeQuery(query);
         } catch (Exception e) {
             System.out.println(e.toString());
-
+            return null;
         }
 
     }
 
 //    check the table info
-    public static void DESC(String table, Connection copn) throws SQLException {
+    public static void DESC(String table, Connection con) throws SQLException {
         if(!isTable(table,con)){
             return;
         }
@@ -162,6 +159,19 @@ public class jdbc {
         } catch (Exception e) {
             System.out.println("Table not created\n"+e.toString());
             return false;
+        }
+    }
+
+    public static int generateId(String table,String Idname,Connection con){
+        try {
+
+            String QueryStatement=String.format("select Max(%s) from %s",Idname,table);
+            String newid=fetch(QueryStatement,con);
+
+            return Integer.parseInt(newid)+1;
+        } catch (Exception e) {
+            System.out.println("query error:\n"+e.toString());
+            return 1;
         }
     }
 
