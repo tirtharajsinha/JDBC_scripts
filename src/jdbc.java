@@ -36,7 +36,7 @@ public class jdbc {
         }
     }
 // display data in the tabuler form on select query.
-    public static void select(String query, Connection con) {
+    public static int select(String query, Connection con) {
         try {
 
 
@@ -45,12 +45,19 @@ public class jdbc {
             ResultSetMetaData rsmd = rs.getMetaData();
 
             int columnnum = rsmd.getColumnCount();
-            for (int i = 1; i <= columnnum; i++) {
-                String name = rsmd.getColumnName(i);
-                System.out.print(name + " | ");
-            }
-            System.out.println();
+            boolean iscol=false;
+            int totalCol=0;
+
             while (rs.next()) {
+                if(!iscol){
+                    for (int i = 1; i <= columnnum; i++) {
+                        String name = rsmd.getColumnName(i);
+                        System.out.print(name + " | ");
+                    }
+                    iscol=true;
+                    System.out.println();
+                }
+                totalCol++;
                 for (int i = 1; i <= columnnum; i++) {
                     System.out.print("---------");
                 }
@@ -63,16 +70,19 @@ public class jdbc {
 
 
             }
+            return totalCol;
 
 
         } catch (Exception e) {
 
             System.out.println("Table Issue \n"+e.toString());
         }
+        return 0;
     }
 
 //    get the single value from the databese.
     public static String fetch(String query, Connection con) {
+
         String result;
         try {
 
@@ -174,6 +184,7 @@ public class jdbc {
             return 1;
         }
     }
+
 
 
 
