@@ -11,7 +11,7 @@ public class insert_using_prepared {
         String insertStatement = "INSERT INTO accounts values(?,?,?)";
         PreparedStatement insertTotal = con.prepareStatement(insertStatement);
 
-        int CurrentId=jdbc.generateId("accounts","acc_no",con);
+        int CurrentId=jdbc.generateId("accounts","acc_no");
         System.out.print("Enter name : ");
         String name=br.readLine();
         System.out.print("Enter balance : ");
@@ -21,7 +21,7 @@ public class insert_using_prepared {
         insertTotal.setInt(3,balance);
 
         insertTotal.executeQuery();
-        jdbc.select("select * from accounts order by acc_no asc",con);
+        jdbc.select("select * from accounts order by acc_no asc");
 
     }
 }

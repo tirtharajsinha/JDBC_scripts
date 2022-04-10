@@ -10,14 +10,14 @@ public class deposit_into_account {
 
         System.out.print("Enter account number : ");
         int acc_id=Integer.parseInt(br.readLine());
-        jdbc.select("select * from accounts where acc_no="+acc_id,con);
+        jdbc.select("select * from accounts where acc_no="+acc_id);
         System.out.print("Enter deposit ammount : ");
         int balance=Integer.parseInt(br.readLine());
 
         System.out.println("You transaction is being processed : ");
         String QueryString="update accounts set balance=balance+"+balance;
         jdbc.raw(QueryString,con);
-        jdbc.select("select * from accounts where acc_no="+acc_id,con);
-        jdbc.closeConnection(con);
+        jdbc.select("select * from accounts where acc_no="+acc_id);
+        jdbc.closeConnection();
     }
 }

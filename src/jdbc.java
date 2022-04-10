@@ -28,7 +28,7 @@ public class jdbc {
         return con;
     }
 // close the database connection
-    public static void closeConnection(Connection con) {
+    public static void closeConnection() {
         try {
             con.close();
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class jdbc {
         }
     }
 // display data in the tabuler form on select query.
-    public static int select(String query, Connection con) {
+    public static int select(String query) {
         try {
 
 
@@ -81,7 +81,7 @@ public class jdbc {
     }
 
 //    get the single value from the databese.
-    public static String fetch(String query, Connection con) {
+    public static String fetch(String query) {
 
         String result;
         try {
@@ -114,8 +114,8 @@ public class jdbc {
     }
 
 //    check the table info
-    public static void DESC(String table, Connection con) throws SQLException {
-        if(!isTable(table,con)){
+    public static void DESC(String table) throws SQLException {
+        if(!isTable(table)){
             return;
         }
         table=table.toUpperCase();
@@ -136,7 +136,7 @@ public class jdbc {
     }
 
 //    check table exists or not
-    public static Boolean isTable(String table,Connection con) throws SQLException {
+    public static Boolean isTable(String table) throws SQLException {
 
         table=table.toUpperCase();
         DatabaseMetaData dbm;
@@ -155,9 +155,9 @@ public class jdbc {
     }
 
 //    create a table if table not exists.
-    public static Boolean createTable(String table,String columns,Connection con) throws SQLException {
+    public static Boolean createTable(String table,String columns) throws SQLException {
 
-        if(isTable(table,con)){
+        if(isTable(table)){
             return false;
         }
         try {
@@ -172,11 +172,11 @@ public class jdbc {
         }
     }
 
-    public static int generateId(String table,String Idname,Connection con){
+    public static int generateId(String table,String Idname){
         try {
 
             String QueryStatement=String.format("select Max(%s) from %s",Idname,table);
-            String newid=fetch(QueryStatement,con);
+            String newid=fetch(QueryStatement);
 
             return Integer.parseInt(newid)+1;
         } catch (Exception e) {
