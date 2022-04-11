@@ -1,7 +1,7 @@
 import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
 import java.sql.*;
 
-public class jdbc {
+public class jdbc_mysql {
 
     private static Connection con;
 
@@ -9,25 +9,8 @@ public class jdbc {
 
     }
 
-//    establish the database connection
-    public static Connection getConnection(String db_name, String pass) {
-
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            try {
-                con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", db_name, pass);
-                System.out.println("Database successfully connected.");
-            } catch (SQLException ex) {
-                // log an exception. fro example:
-                System.out.println("Failed to create the database connection.");
-            }
-        } catch (ClassNotFoundException ex) {
-            // log an exception. for example:
-            System.out.println("Driver not found.");
-        }
-        return con;
-    }
-    public static Connection mysql_getConnection(String db_name, String username,String pass) {
+    //    establish the database connection
+    public static Connection getConnection(String db_name, String username,String pass) {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -46,7 +29,7 @@ public class jdbc {
     }
 
 
-// close the database connection
+    // close the database connection
     public static void closeConnection() {
         try {
             con.close();
@@ -54,7 +37,7 @@ public class jdbc {
             System.out.println(e.toString());
         }
     }
-// display data in the tabuler form on select query.
+    // display data in the tabuler form on select query.
     public static int select(String query) {
         try {
 
@@ -99,7 +82,7 @@ public class jdbc {
         return 0;
     }
 
-//    get the single value from the databese.
+    //    get the single value from the databese.
     public static String fetch(String query) {
 
         String result;
@@ -120,23 +103,23 @@ public class jdbc {
         return result;
     }
 
-//    run the raw query
-    public static ResultSet raw(String query, Connection con) {
+    //    run the raw query
+    public static int raw(String query, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            return stmt.executeQuery(query);
+            return stmt.executeUpdate(query);
         } catch (Exception e) {
             System.out.println(e.toString());
-            return null;
+            return 0;
         }
 
     }
 
-//    check the table info
+    //    check the table info
     public static void DESC(String table) throws SQLException {
-        if(!isTable(table)){
-            return;
-        }
+//        if(!isTable(table)){
+//            return;
+//        }
         table=table.toUpperCase();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from "+table);
@@ -154,7 +137,7 @@ public class jdbc {
 
     }
 
-//    check table exists or not
+    //    check table exists or not
     public static Boolean isTable(String table) throws SQLException {
 
         table=table.toUpperCase();
@@ -173,16 +156,13 @@ public class jdbc {
         }
     }
 
-//    create a table if table not exists.
-    public static Boolean createTable(String table,String columns) throws SQLException {
+    //    create a table if table not exists.
+    public static Boolean createTable(String table,String columns){
 
-        if(isTable(table)){
-            return false;
-        }
         try {
             Statement stmt = con.createStatement();
-            String QueryStatement=String.format("create table %s(%s)",table,columns);
-            stmt.executeQuery(QueryStatement);
+            String QueryStatement=String.format("create table IF NOT EXISTS %s(%s)",table,columns);
+            stmt.executeUpdate(QueryStatement);
             System.out.println("Table created");
             return true;
         } catch (Exception e) {
@@ -210,3 +190,4 @@ public class jdbc {
 
 
 }
+

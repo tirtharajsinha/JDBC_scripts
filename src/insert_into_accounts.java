@@ -7,7 +7,8 @@ public class insert_into_accounts {
 
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 
-        Connection con= jdbc.getConnection("system","oracle");
+//        Connection con= jdbc.getConnection("system","oracle");
+        Connection con=jdbc.mysql_getConnection("jdbc","root","");
 //        jdbc.raw("drop table accounts",con);
         jdbc.createTable("accounts","acc_no number primary key,holdername varchar2(225),balance float");
         jdbc.DESC("person");
