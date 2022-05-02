@@ -18,7 +18,7 @@ public class remove_account {
 
 //        deleteTotal.executeQuery();
 
-        if(jdbc.raw("delete from accounts where acc_no="+closeId,con) == null){
+        if(jdbc.raw("delete from accounts where acc_no="+closeId) == null){
             System.out.println("failed");
         }
 

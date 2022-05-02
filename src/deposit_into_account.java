@@ -16,7 +16,7 @@ public class deposit_into_account {
 
         System.out.println("You transaction is being processed : ");
         String QueryString="update accounts set balance=balance+"+balance;
-        jdbc.raw(QueryString,con);
+        jdbc.raw(QueryString);
         jdbc.select("select * from accounts where acc_no="+acc_id);
         jdbc.closeConnection();
     }

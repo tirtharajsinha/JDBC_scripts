@@ -5,7 +5,7 @@ all jdbc scripts
 #### Install java
 > [Download](https://www.oracle.com/java/technologies/downloads/) java jdk and install.
 #### Install oracle
-> Download and install oracle express edition
+> Download and install oracle 11g express edition
 
 #### Set classpath
 1. Download [ojdbc14.jar](https://static.javatpoint.com/src/jdbc/ojdbc14.jar)

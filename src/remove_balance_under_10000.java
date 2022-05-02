@@ -7,7 +7,7 @@ public class remove_balance_under_10000 {
         jdbc.select("select * from accounts");
         System.out.println("removed all row with balance less than 10000.");
         String QueryString="delete from accounts where balance<10000";
-        jdbc.raw(QueryString,con);
+        jdbc.raw(QueryString);
         jdbc.select("select * from accounts");
     }
 }

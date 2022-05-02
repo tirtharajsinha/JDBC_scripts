@@ -121,7 +121,7 @@ public class jdbc {
     }
 
 //    run the raw query
-    public static ResultSet raw(String query, Connection con) {
+    public static ResultSet raw(String query) {
         try {
             Statement stmt = con.createStatement();
             return stmt.executeQuery(query);
@@ -131,6 +131,7 @@ public class jdbc {
         }
 
     }
+
 
 //    check the table info
     public static void DESC(String table) throws SQLException {

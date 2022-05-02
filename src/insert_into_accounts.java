@@ -20,7 +20,7 @@ public class insert_into_accounts {
             String name=br.readLine();
             System.out.print("Enter balance : ");
             int balance=Integer.parseInt(br.readLine());
-            jdbc.raw(String.format("INSERT INTO accounts values(%d,'%s',%d)",i,name,balance),con);
+            jdbc.raw(String.format("INSERT INTO accounts values(%d,'%s',%d)",i,name,balance));
         }
 
         jdbc.select("select * from accounts");
